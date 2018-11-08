@@ -4,7 +4,20 @@ import router from './router'
 
 Vue.config.productionTip = false
 
+const globalData = {
+  isAuthenticated: false,
+  token: ''
+}
+
+const globalMethods = {
+  async authenticate(returnPath) {
+    console.log('yet to be implemented');
+  }
+}
+
 new Vue({
   router,
-  render: h => h(App)
+  data: globalData,
+  methods: globalMethods,
+  render: h => h(App),
 }).$mount('#app')
