@@ -92,9 +92,9 @@ namespace QuickstartIdentityServer
                     AllowedGrantTypes = GrantTypes.Implicit,
                     AllowAccessTokensViaBrowser = true,
 
-                    RedirectUris = { "http://localhost:5000/callback" },
-                    PostLogoutRedirectUris = { "http://localhost:5000/" },
-                    AllowedCorsOrigins = { "http://localhost:5000" },
+                    RedirectUris = { "https://localhost:5000/callback" },
+                    PostLogoutRedirectUris = { "https://localhost:5000/" },
+                    AllowedCorsOrigins = { "https://localhost:5000" },
 
                     AllowedScopes =
                     {
