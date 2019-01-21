@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from './views/Home.vue'
 import Callback from './views/Callback'
+import Unauthorized from './views/Unauthorized'
 
 Vue.use(Router)
 
@@ -19,7 +20,7 @@ let router = new Router({
       name: 'about',
       meta: {
         requiresAuth: true
-      },  
+      },
       // route level code-splitting
       // this generates a separate chunk (about.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
@@ -29,6 +30,11 @@ let router = new Router({
       path: '/callback',
       name: 'callback',
       component: Callback
+    },
+    {
+      path: '/unauthorized',
+      name: 'Unauthorized',
+      component: Unauthorized
     },
   ]
 })
