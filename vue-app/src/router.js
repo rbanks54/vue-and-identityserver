@@ -42,8 +42,8 @@ let router = new Router({
 export default router;
 
 router.beforeEach(async (to, from, next) => {
-  let app = router.app.$data || {isAuthenticated: false}
-  if (app.isAuthenticated) {
+  await Vue.nextTick();
+  if (router.app.isAuthenticated) {
     //already signed in, we can navigate anywhere
     next()
   } else if (to.matched.some(record => record.meta.requiresAuth)) {
