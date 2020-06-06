@@ -7,7 +7,6 @@ import axios from 'axios'
 Vue.config.productionTip = false
 
 const globalData = {
-  isAuthenticated: false,
   user: '',
   mgr: mgr
 }
@@ -15,14 +14,13 @@ const globalData = {
 const globalMethods = {
   async authenticate(returnPath) {
     const user = await this.$root.getUser(); //see if the user details are in local storage
-    if (!!user) {
-      this.isAuthenticated = true;
+    if (!!user && !user.expired) {
       this.user = user;
     } else {
       await this.$root.signIn(returnPath);
     }
   },
-  async getUser () {
+  async getUser() {
     try {
       let user = await this.mgr.getUser();
       return user;
@@ -30,9 +28,9 @@ const globalMethods = {
       console.log(err);
     }
   },
-  signIn (returnPath) {
+  signIn(returnPath) {
     returnPath ? this.mgr.signinRedirect({ state: returnPath })
-        : this.mgr.signinRedirect();
+      : this.mgr.signinRedirect();
   }
 }
 
@@ -40,6 +38,11 @@ let v = new Vue({
   router,
   data: globalData,
   methods: globalMethods,
+  computed: {
+    isAuthenticated: function () {
+      return !!this.user && !this.user.expired;
+    }
+  },
   render: h => h(App),
 }).$mount('#app')
 
@@ -53,7 +56,7 @@ axios.interceptors.request.use((config) => {
   }
   return config;
 },
-(err) => {
-  //What do we do when we get errors?
-});
+  (err) => {
+    //What do we do when we get errors?
+  });
 
